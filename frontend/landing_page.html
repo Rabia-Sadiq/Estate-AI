@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Estate-AI | Lahore's Premium Real Estate Curator</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary": "#ffffff",
+              "secondary-fixed": "#d5e3fc",
+              "on-error-container": "#93000a",
+              "error": "#ba1a1a",
+              "surface-dim": "#d8dadc",
+              "on-tertiary-fixed": "#111c2d",
+              "on-background": "#191c1e",
+              "surface-container-low": "#f2f4f6",
+              "surface-container-high": "#e6e8ea",
+              "on-secondary-container": "#57657a",
+              "tertiary": "#545f73",
+              "surface-variant": "#e0e3e5",
+              "surface-tint": "#006c49",
+              "background": "#f7f9fb",
+              "outline": "#6c7a71",
+              "inverse-on-surface": "#eff1f3",
+              "on-primary-container": "#00422b",
+              "secondary-fixed-dim": "#b9c7df",
+              "on-tertiary-fixed-variant": "#3c475a",
+              "on-primary-fixed": "#002113",
+              "on-tertiary-container": "#2e394c",
+              "surface-bright": "#f7f9fb",
+              "tertiary-fixed-dim": "#bcc7de",
+              "surface": "#f7f9fb",
+              "primary-fixed": "#6ffbbe",
+              "secondary-container": "#d5e3fc",
+              "primary": "#006c49",
+              "on-primary-fixed-variant": "#005236",
+              "on-secondary-fixed-variant": "#3a485b",
+              "outline-variant": "#bbcabf",
+              "on-surface-variant": "#3c4a42",
+              "primary-fixed-dim": "#4edea3",
+              "tertiary-container": "#98a3ba",
+              "on-secondary": "#ffffff",
+              "inverse-primary": "#4edea3",
+              "surface-container": "#eceef0",
+              "on-surface": "#191c1e",
+              "on-primary": "#ffffff",
+              "primary-container": "#10b981",
+              "error-container": "#ffdad6",
+              "secondary": "#515f74",
+              "surface-container-highest": "#e0e3e5",
+              "tertiary-fixed": "#d8e3fb",
+              "inverse-surface": "#2d3133",
+              "on-secondary-fixed": "#0d1c2e"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-emerald-gradient {
+            background: linear-gradient(135deg, #006c49 0%, #10b981 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- WebSocket Connectivity Status -->
+<div class="fixed top-0 left-0 w-full z-[60] flex justify-center pointer-events-none">
+<div class="mt-2 px-3 py-1 bg-white/40 backdrop-blur-md rounded-full border border-white/20 shadow-sm flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+</span>
+<span class="text-[10px] font-bold tracking-widest text-emerald-800 uppercase">WebSocket: Connected</span>
+</div>
+</div>
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm shadow-emerald-900/5">
+<div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<a class="text-2xl font-black tracking-tight text-emerald-700 dark:text-emerald-400" href="zara.html">Estate-AI</a>
+<div class="hidden md:flex gap-6">
+<a class="text-emerald-700 dark:text-emerald-300 font-bold border-b-2 border-emerald-600 transition-colors duration-300" href="landing_page.html">Explore</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-500 transition-colors duration-300" href="listing.html">Listings</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-500 transition-colors duration-300" href="market_trends.html">Market Trends</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-500 transition-colors duration-300" href="about.html">About</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden lg:flex items-center text-slate-600 font-medium hover:text-emerald-500 transition-all active:scale-95">Sign In</button>
+<button class="bg-emerald-gradient text-white px-6 py-2 rounded-full font-bold shadow-lg shadow-emerald-900/10 scale-102 hover:opacity-90 active:scale-95 transition-all">List Property</button>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Cinematic Hero Section -->
+<section class="relative h-[870px] flex items-center justify-center overflow-hidden px-6">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="Modern architectural luxury villa in Lahore with clean lines, lush green gardens and warm golden evening lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDbZZ3HCxwcStGV2_aC449EIprT8I4lrdnQ1ieoi4QaXKSvYSCCefw_vesLg0dvYcOBLaItTifHUij4UMgEGNiaiyBWkNUPk7rnVAtJdNqtrqla-seCJf8RL76nr6VK2nxZaR3K7MfrdP8UMlnWLJWc51GumulBlbxu9yw9ItHbfNoOj7ZDSp01oeZsowlLjOwD4RUrirsvfPpKhGnSSVtiXdRhjO-WCRzZLjvugVYlPsO-wRRm81x1p-be-LM2Km2ZUbHpubTLA4"/>
+<div class="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px]"></div>
+</div>
+<div class="relative z-10 w-full max-w-4xl text-center space-y-8">
+<div class="space-y-4">
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-tight">
+                        Curating Lahore's <br/> <span class="text-primary-fixed">Finest Spaces.</span>
+</h1>
+<p class="text-white/90 text-lg md:text-xl font-medium max-w-2xl mx-auto">
+                        AI-powered real estate intelligence for DHA, Bahria Town, and beyond. Experience the future of property search.
+                    </p>
+</div>
+<!-- Natural Language Search Bar -->
+<div class="relative group max-w-2xl mx-auto">
+<div class="absolute -inset-1 bg-emerald-500/20 rounded-full blur opacity-0 group-focus-within:opacity-100 transition duration-500"></div>
+<div class="relative flex items-center bg-white/95 backdrop-blur-xl rounded-full p-2 shadow-2xl shadow-slate-900/40">
+<span class="material-symbols-outlined ml-4 text-slate-400" data-icon="search">search</span>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-slate-400 px-4 py-3 text-lg font-medium" placeholder="Try '3 Marla in Johar Town' or 'Luxury villa in DHA Phase 6'" type="text"/>
+<button class="bg-emerald-gradient text-white px-8 py-3 rounded-full font-bold transition-all hover:shadow-emerald-500/20 active:scale-95">
+                            Search AI
+                        </button>
+</div>
+</div>
+<div class="flex justify-center gap-3">
+<span class="bg-white/10 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10">Trending: DHA Phase 8</span>
+<span class="bg-white/10 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10">Gulberg V</span>
+</div>
+</div>
+</section>
+<!-- Featured Categories Section -->
+<section class="py-24 px-8 bg-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+<div class="space-y-2">
+<h2 class="font-headline text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Verified Districts</h2>
+<p class="text-slate-500 font-medium">Hand-picked premium locations across the heart of Lahore.</p>
+</div>
+<a class="group flex items-center gap-2 text-emerald-700 font-bold" href="#">
+                        View All Sectors
+                        <span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Bento-style Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- DHA Card -->
+<div class="md:col-span-8 group relative h-80 rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Aerial view of planned urban development in DHA Lahore with modern grid layouts and manicured parks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGv1UaXa91R3ihV1BtV7UE5vipH2gGw90EbO1AmPnQb-q42LSBVxULLfb6YKF4G3UvJKr2COFVh1xbyk3MGM-fkaA-ElmJO5YSq1P8JTfROyjdYoODy7R-5Sremm21bMz2vBtkeeXZwTVlqQDgwUBVxcoMaiVDyrVVHw2LhBvr73tRMnz_4u2A7ZKJ8JVMD430wUQQ526WPM-NcYlVAQ_qcXmM3XTTpCGWi7AvRPZugu1g5C8MEP53_UEjO_BO9Egj5-NK_gAAhbo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<div class="bg-emerald-500 text-white p-2 rounded-xl inline-flex mb-4">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+</div>
+<h3 class="text-3xl font-headline font-bold text-white">DHA Phases</h3>
+<p class="text-white/80 font-medium">Explore Phase 1 to 9 Prism listings.</p>
+</div>
+</div>
+<!-- Bahria Town Card -->
+<div class="md:col-span-4 group relative h-80 rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Ornate entrance gate and clock tower typical of Bahria Town architecture under a clear blue sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVw_DkXD8TcsDtGS7DHQr6IpzhB_IiskEeAoZaiSWraZM0bN4kPSTjULqrFK2dFx_N5vWSKXLITRTMW2SpRz0FHFxzGrRy_CsDtITEB37gJ7l54wg38bX9tbxz4rNgn_B8wp2g1yEICfUjdflQu8VCHJdf1_vmv99UbpA3pjUMhv7RF6imnVfPrP2ZOgCOpPG4kafzLyTpka7d8jGbxbPHUxKZTY4atw8hQO_QmjxaDGfsHhehM7BZBG7dNls4Ov2S-IX2FyQQOwU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-emerald-900/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<div class="bg-white/20 backdrop-blur-md text-white p-2 rounded-xl inline-flex mb-4">
+<span class="material-symbols-outlined" data-icon="castle">castle</span>
+</div>
+<h3 class="text-2xl font-headline font-bold text-white">Bahria Town</h3>
+<p class="text-white/80 font-medium">Luxury lifestyle communities.</p>
+</div>
+</div>
+<!-- Gulberg Card -->
+<div class="md:col-span-4 group relative h-80 rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Modern high-rise commercial buildings in Gulberg Lahore reflecting the city's growing vertical skyline" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvPPz2J6RqHDBuMVTiqkUqiV5o5xLt_XPKmZGpZtx3q1LlD-EFdw_UwEpr-tuDD6HrPWApye3VGz_dtyU0mVI2qutBPB1KIwqff06Ck0DTvKV0K8gxfs5VlCR-SuvPmCMiTHK1o3RxvsWtI2fM9UiHGBloxeIYTKROTiBabaNV6Gwad8Fa5kOrDEaYhR_-ztyAthSlybot93TS4FNbp2EWWVUJAOHrEnZfg3mH5y4EbjBBQb7abhc5cKzCLmShC3P9oSb6mkIFj_E"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<div class="bg-white/20 backdrop-blur-md text-white p-2 rounded-xl inline-flex mb-4">
+<span class="material-symbols-outlined" data-icon="apartment">apartment</span>
+</div>
+<h3 class="text-2xl font-headline font-bold text-white">Gulberg</h3>
+<p class="text-white/80 font-medium">Commercial hubs &amp; vertical living.</p>
+</div>
+</div>
+<!-- Market Insights Card -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-3xl p-8 flex flex-col justify-center gap-6 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+</div>
+<div>
+<h4 class="text-xl font-headline font-bold text-slate-900">AI Market Insights</h4>
+<p class="text-slate-500">Prices in Lahore rose 12% last quarter.</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="p-4 bg-surface-container-low rounded-2xl">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Buy index</span>
+<div class="text-2xl font-black text-emerald-600">7.2</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-2xl">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Rent yield</span>
+<div class="text-2xl font-black text-emerald-600">4.5%</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-2xl">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Liquidity</span>
+<div class="text-2xl font-black text-emerald-600">High</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Indicators -->
+<section class="py-16 bg-white">
+<div class="max-w-7xl mx-auto px-8 flex flex-wrap justify-between items-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
+<span class="text-2xl font-black tracking-tighter text-slate-400">LDA APPROVED</span>
+<span class="text-2xl font-black tracking-tighter text-slate-400">DHA AUTHORITY</span>
+<span class="text-2xl font-black tracking-tighter text-slate-400">BAHRIA GROUP</span>
+<span class="text-2xl font-black tracking-tighter text-slate-400">FEDERAL BOARD</span>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 w-full py-12 px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<a class="font-bold text-slate-900 dark:text-white text-xl" href="#">Estate-AI</a>
+<p class="mt-4 text-slate-400 text-sm leading-relaxed">
+                    The premium real estate portal for Lahore. Powered by AI, designed for humans.
+                </p>
+</div>
+<div>
+<h5 class="font-bold text-slate-900 text-sm mb-4">Destinations</h5>
+<ul class="space-y-2">
+<li><a class="text-slate-400 text-xs uppercase tracking-widest hover:text-emerald-500 transition-colors" href="#">DHA Regulations</a></li>
+<li><a class="text-slate-400 text-xs uppercase tracking-widest hover:text-emerald-500 transition-colors" href="#">Bahria Town Portal</a></li>
+<li><a class="text-slate-400 text-xs uppercase tracking-widest hover:text-emerald-500 transition-colors" href="#">Gulberg Highrise</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-slate-900 text-sm mb-4">Legal</h5>
+<ul class="space-y-2">
+<li><a class="text-slate-400 text-xs uppercase tracking-widest hover:text-emerald-500 transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-400 text-xs uppercase tracking-widest hover:text-emerald-500 transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-slate-900 text-sm mb-4">Contact</h5>
+<ul class="space-y-2">
+<li><a class="text-slate-400 text-xs uppercase tracking-widest hover:text-emerald-500 transition-colors" href="#">Contact Us</a></li>
+<li class="flex items-center gap-2 mt-4">
+<span class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+<span class="material-symbols-outlined text-sm" data-icon="phone">phone</span>
+</span>
+<span class="text-slate-600 text-sm font-bold">+92 42 111 ESTATE</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-slate-200 max-w-7xl mx-auto flex flex-col md:row justify-between items-center gap-4">
+<p class="text-slate-400 text-[10px] uppercase tracking-[0.2em]">© 2024 Estate-AI Lahore. Licensed by LDA.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-slate-300 hover:text-emerald-600 cursor-pointer" data-icon="share">share</span>
+<span class="material-symbols-outlined text-slate-300 hover:text-emerald-600 cursor-pointer" data-icon="public">public</span>
+</div>
+</div>
+</footer>
+<!-- Persistent AI Widget (Zara AI) -->
+<div class="fixed bottom-8 right-8 z-[100] group">
+<div class="absolute -top-16 right-0 bg-white shadow-2xl rounded-2xl p-4 w-64 border border-slate-100 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 pointer-events-none">
+<p class="text-xs font-bold text-emerald-600 mb-1">Zara AI Assistant</p>
+<p class="text-sm text-on-surface font-medium leading-tight">"Assalam-o-Alaikum! I've found 3 new listings in DHA Phase 6 that match your preference."</p>
+<div class="absolute bottom-[-6px] right-8 w-3 h-3 bg-white border-r border-b border-slate-100 rotate-45"></div>
+</div>
+<button class="relative w-16 h-16 bg-emerald-gradient rounded-full shadow-2xl flex items-center justify-center text-white hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-3xl" data-icon="psychology">psychology</span>
+<!-- Pulsing Notification -->
+<span class="absolute top-0 right-0 flex h-5 w-5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-5 w-5 bg-white flex items-center justify-center">
+<span class="text-[10px] font-bold text-emerald-600">1</span>
+</span>
+</span>
+</button>
+</div>
+</body></html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Estate-AI | Premium Lahore Listings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-on-surface": "#eff1f3",
+              "on-primary-container": "#00422b",
+              "error": "#ba1a1a",
+              "background": "#f7f9fb",
+              "tertiary-fixed": "#d8e3fb",
+              "primary": "#006c49",
+              "error-container": "#ffdad6",
+              "on-surface-variant": "#3c4a42",
+              "tertiary": "#545f73",
+              "surface": "#f7f9fb",
+              "on-error-container": "#93000a",
+              "on-primary": "#ffffff",
+              "on-background": "#191c1e",
+              "outline": "#6c7a71",
+              "on-tertiary-fixed": "#111c2d",
+              "on-error": "#ffffff",
+              "inverse-surface": "#2d3133",
+              "surface-dim": "#d8dadc",
+              "secondary-container": "#d5e3fc",
+              "surface-bright": "#f7f9fb",
+              "primary-fixed": "#6ffbbe",
+              "outline-variant": "#bbcabf",
+              "primary-container": "#10b981",
+              "primary-fixed-dim": "#4edea3",
+              "on-secondary-container": "#57657a",
+              "on-primary-fixed-variant": "#005236",
+              "surface-container": "#eceef0",
+              "surface-container-low": "#f2f4f6",
+              "on-tertiary-fixed-variant": "#3c475a",
+              "tertiary-container": "#98a3ba",
+              "surface-tint": "#006c49",
+              "on-surface": "#191c1e",
+              "surface-container-highest": "#e0e3e5",
+              "on-secondary": "#ffffff",
+              "tertiary-fixed-dim": "#bcc7de",
+              "surface-variant": "#e0e3e5",
+              "on-secondary-fixed": "#0d1c2e",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-container": "#2e394c",
+              "secondary-fixed-dim": "#b9c7df",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary-fixed-variant": "#3a485b",
+              "surface-container-high": "#e6e8ea",
+              "secondary-fixed": "#d5e3fc",
+              "inverse-primary": "#4edea3",
+              "secondary": "#515f74",
+              "on-primary-fixed": "#002113"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .no-line { border: none !important; }
+      .tonal-shift { background: linear-gradient(to bottom, rgba(247, 249, 251, 0), rgba(242, 244, 246, 1)); }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<nav class="flex justify-between items-center h-20 px-8 max-w-[1440px] mx-auto">
+<div class="text-2xl font-black text-emerald-700 dark:text-emerald-500 uppercase tracking-tighter font-headline">
+                Estate-AI
+            </div>
+<div class="hidden md:flex items-center space-gap-8 gap-x-8">
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-emerald-600 hover:scale-105 transition-transform duration-200 ease-out cursor-pointer active:scale-95 font-headline" href="landing_page.html">Explore</a>
+<a class="text-emerald-700 dark:text-emerald-400 font-extrabold border-b-2 border-emerald-600 pb-1 hover:scale-105 transition-transform duration-200 ease-out cursor-pointer active:scale-95 font-headline" href="listing.html">Listings</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-emerald-600 hover:scale-105 transition-transform duration-200 ease-out cursor-pointer active:scale-95 font-headline" href="market_trends.html">Market Trends</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-emerald-600 hover:scale-105 transition-transform duration-200 ease-out cursor-pointer active:scale-95 font-headline" href="about.html">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button onclick="openAuthModal('login')" data-auth-btn class="hidden lg:block px-6 py-2.5 text-emerald-600 font-bold hover:scale-105 transition-transform cursor-pointer">Sign In</button>
+<button data-list-btn class="bg-primary-container text-on-primary-container px-8 py-3 rounded-full font-bold shadow-md hover:scale-105 active:scale-95 transition-all">List Property</button>
+</div>
+</nav>
+</header>
+<main class="pt-32 pb-24 px-4 md:px-8 max-w-[1440px] mx-auto min-h-screen">
+<!-- Search & Filter Bar (Hero Area) -->
+<section class="mb-16">
+<h1 class="font-headline text-5xl md:text-6xl font-extrabold tracking-tight text-on-surface mb-4">
+                Premium Architectural Curation <span class="text-primary">Lahore</span>
+</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl mb-10">Discover hand-picked residences in DHA, Gulberg, and Bahria Town, vetted by our AI for market resilience and aesthetic value.</p>
+<!-- Dynamic Filters Shell -->
+<div class="bg-surface-container-lowest rounded-[2rem] p-6 shadow-sm flex flex-wrap lg:flex-nowrap items-end gap-6">
+<div class="flex-1 min-w-[160px]">
+  <label class="block text-[10px] font-bold uppercase tracking-widest text-outline mb-2 px-1">Location</label>
+  <input id="f-location" placeholder="DHA, Gulberg, Bahria..." onkeydown="if(event.key==='Enter')applyFilters()"
+    class="w-full bg-surface-container-high border-none rounded-xl py-3 px-4 focus:ring-2 focus:ring-primary/20 transition-all font-semibold text-sm"/>
+</div>
+<div class="flex-1 min-w-[140px]">
+  <label class="block text-[10px] font-bold uppercase tracking-widest text-outline mb-2 px-1">Type</label>
+  <select id="f-type" class="w-full bg-surface-container-high border-none rounded-xl py-3 px-4 focus:ring-2 focus:ring-primary/20 transition-all font-semibold text-sm">
+    <option value="">All Types</option>
+    <option>House</option><option>Bungalow</option><option>Apartment</option>
+    <option>Plot</option><option>Commercial Plot</option><option>Shop</option><option>Office</option>
+  </select>
+</div>
+<div class="flex-1 min-w-[120px]">
+  <label class="block text-[10px] font-bold uppercase tracking-widest text-outline mb-2 px-1">Min Beds</label>
+  <select id="f-beds" class="w-full bg-surface-container-high border-none rounded-xl py-3 px-4 focus:ring-2 focus:ring-primary/20 transition-all font-semibold text-sm">
+    <option value="">Any</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+  </select>
+</div>
+<div class="flex-1 min-w-[160px]">
+  <label class="block text-[10px] font-bold uppercase tracking-widest text-outline mb-2 px-1">Max Price (PKR)</label>
+  <input id="f-max-price" type="number" placeholder="e.g. 50000000" 
+    class="w-full bg-surface-container-high border-none rounded-xl py-3 px-4 focus:ring-2 focus:ring-primary/20 transition-all font-semibold text-sm"/>
+</div>
+<div class="w-full lg:w-auto flex gap-2">
+  <button onclick="applyFilters()" class="flex-1 lg:flex-none bg-primary text-on-primary px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform text-sm">
+    <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1;">tune</span> Filter
+  </button>
+  <button onclick="clearFilters()" class="px-4 py-4 rounded-full font-bold border border-outline-variant text-outline hover:bg-surface-container-high transition-all text-sm">✕</button>
+</div>
+</div>
+</section>
+
+<!-- Inquiry Modal -->
+<div id="inq-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[9980] flex items-center justify-center p-4">
+  <div class="bg-white rounded-3xl w-full max-w-md shadow-2xl p-8">
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="text-lg font-bold text-gray-900">Contact Seller</h3>
+      <button onclick="closeInqModal()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 font-bold text-lg">×</button>
+    </div>
+    <div id="inq-prop-info" class="bg-emerald-50 rounded-xl p-4 mb-5 text-sm font-medium text-emerald-800"></div>
+    <div class="space-y-3">
+      <input id="inq-name" type="text" placeholder="Your Name *" class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"/>
+      <input id="inq-phone" type="tel" placeholder="Phone Number *" class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"/>
+      <input id="inq-email" type="email" placeholder="Email (optional)" class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"/>
+      <textarea id="inq-msg" rows="3" placeholder="Message (optional)" class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 resize-none"></textarea>
+      <input type="hidden" id="inq-prop-id"/>
+      <button onclick="sendInquiry()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm transition-all active:scale-95">Send Inquiry 📩</button>
+    </div>
+  </div>
+</div>
+
+<div class="flex flex-col lg:flex-row gap-12">
+<!-- Property Grid -->
+<div class="flex-grow">
+<div class="flex justify-between items-center mb-8">
+<h2 id="result-count" class="font-headline text-2xl font-bold">Loading listings...</h2>
+<div class="flex items-center gap-3">
+<span class="text-sm font-semibold text-outline">Sort by:</span>
+<select onchange="sortProps(this.value)" class="bg-transparent border-none text-primary font-bold text-sm focus:ring-0 p-0 cursor-pointer">
+  <option value="recent">Recently Added</option>
+  <option value="price-desc">Price: High to Low</option>
+  <option value="price-asc">Price: Low to High</option>
+</select>
+</div>
+</div>
+<div id="prop-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- cards injected by JS -->
+</div>
+</div>
+<!-- Zara AI Sidebar -->
+<aside class="w-full lg:w-[380px] space-y-8">
+<div class="bg-primary rounded-[2.5rem] p-8 text-on-primary relative overflow-hidden shadow-2xl">
+<!-- Subtle AI Background Pattern -->
+<div class="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center backdrop-blur">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-lg leading-tight">Zara AI</h4>
+<p class="text-[10px] uppercase tracking-widest opacity-80 font-bold">Investment Curator</p>
+</div>
+</div>
+<p class="font-body text-sm leading-relaxed mb-8 text-primary-fixed">
+                            "I've analyzed the latest market shifts in Lahore. Based on current DHA Phase 9 development cycles, residential plots are showing a 12% projected appreciation for Q4."
+                        </p>
+<div class="space-y-4">
+<h5 class="text-[10px] font-bold uppercase tracking-[0.2em] opacity-60">High-Potential Picks</h5>
+<!-- AI Suggested Item 1 -->
+<div class="bg-white/10 hover:bg-white/20 transition-colors p-4 rounded-2xl cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold">DHA Phase 9 Prism</span>
+<span class="text-emerald-300 font-black text-xs">+14.2%</span>
+</div>
+<p class="text-[10px] opacity-70">1 Kanal Residential Plot • Prism Sector Q</p>
+</div>
+<!-- AI Suggested Item 2 -->
+<div class="bg-white/10 hover:bg-white/20 transition-colors p-4 rounded-2xl cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold">Gulberg Residencia</span>
+<span class="text-emerald-300 font-black text-xs">+9.8%</span>
+</div>
+<p class="text-[10px] opacity-70">Luxury Studio • Pre-launch Rate</p>
+</div>
+</div>
+<button onclick="window.location.href='zara.html'" class="w-full mt-8 py-4 bg-white text-primary font-bold rounded-full hover:scale-105 transition-transform active:scale-95 text-sm">
+                            Chat with Zara AI →
+                        </button>
+</div>
+</div>
+<!-- Verified Badge Card -->
+<div class="bg-surface-container-low rounded-[2rem] p-8">
+<div class="flex items-center gap-2 mb-4 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+<h4 class="font-headline font-bold">100% Vetted</h4>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                        Every listing on Estate-AI undergoes a rigorous 42-point architectural and legal verification process by our curators.
+                    </p>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-16 bg-slate-50 dark:bg-slate-950 mt-24">
+<div class="bg-slate-200 dark:bg-slate-800 h-[1px] mb-16 max-w-7xl mx-auto opacity-30"></div>
+<div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-8">
+<div class="text-lg font-bold text-emerald-800 dark:text-emerald-200 font-headline">Estate-AI</div>
+<div class="flex gap-8">
+<a class="text-slate-500 hover:text-emerald-500 transition-colors duration-200 hover:underline decoration-emerald-500 underline-offset-4 text-sm font-inter" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-emerald-500 transition-colors duration-200 hover:underline decoration-emerald-500 underline-offset-4 text-sm font-inter" href="#">Terms of Service</a>
+<a class="text-slate-500 hover:text-emerald-500 transition-colors duration-200 hover:underline decoration-emerald-500 underline-offset-4 text-sm font-inter" href="#">Contact Support</a>
+<a class="text-slate-500 hover:text-emerald-500 transition-colors duration-200 hover:underline decoration-emerald-500 underline-offset-4 text-sm font-inter" href="listing.html">Verified Listings</a>
+</div>
+<div class="font-inter text-sm text-slate-500 dark:text-slate-400">
+                © 2024 Estate-AI Lahore. Premium Architectural Curation.
+            </div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 md:hidden bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] rounded-t-3xl">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/10 tap-highlight-transparent transition-all duration-300" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-inter text-[10px] font-semibold uppercase tracking-widest mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-2xl px-5 py-2 tap-highlight-transparent transition-all duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">apartment</span>
+<span class="font-inter text-[10px] font-semibold uppercase tracking-widest mt-1">Listings</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/10 tap-highlight-transparent transition-all duration-300" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="font-inter text-[10px] font-semibold uppercase tracking-widest mt-1">Trends</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/10 tap-highlight-transparent transition-all duration-300" href="#">
+<span class="material-symbols-outlined">info</span>
+<span class="font-inter text-[10px] font-semibold uppercase tracking-widest mt-1">About</span>
+</a>
+</nav>
+<script src="auth.js"></script>
+<script>
+const API = 'http://127.0.0.1:8000';
+let allProps = [], currentSort = 'recent';
+
+const propTypes = ['House','Bungalow','Apartment','Plot','Commercial Plot','Shop','Office'];
+// Placeholder images per type
+const typeImages = {
+  House: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80',
+  Bungalow: 'https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=600&q=80',
+  Apartment: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80',
+  Plot: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80',
+  default: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80'
+};
+
+function getImg(type) { return typeImages[type] || typeImages.default; }
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+async function loadProps() {
+  const grid = document.getElementById('prop-grid');
+  grid.innerHTML = Array(4).fill(`
+    <div class="bg-surface-container-lowest rounded-3xl overflow-hidden animate-pulse">
+      <div class="aspect-[16/10] bg-surface-container-high"></div>
+      <div class="p-6 space-y-3">
+        <div class="h-3 bg-surface-container-high rounded w-1/3"></div>
+        <div class="h-5 bg-surface-container-high rounded w-3/4"></div>
+        <div class="h-4 bg-surface-container-high rounded w-1/2"></div>
+      </div>
+    </div>`).join('');
+
+  const params = new URLSearchParams();
+  const loc  = document.getElementById('f-location').value.trim();
+  const type = document.getElementById('f-type').value;
+  const beds = document.getElementById('f-beds').value;
+  const maxP = document.getElementById('f-max-price').value;
+  if (loc)  params.set('location', loc);
+  if (type) params.set('type', type);
+  if (beds) params.set('bedrooms', beds);
+  if (maxP) params.set('max_price', maxP);
+
+  try {
+    const r = await fetch(`${API}/api/properties?${params}`);
+    const d = await r.json();
+    allProps = d.properties || [];
+    renderProps(sortedProps());
+  } catch {
+    grid.innerHTML = `<div class="col-span-2 text-center py-20 text-red-400">
+      <div class="text-4xl mb-3">⚠️</div>
+      <p class="font-bold text-lg mb-1">Backend not connected</p>
+      <p class="text-sm">Run: <code class="bg-red-50 px-2 py-0.5 rounded">uvicorn server:app --reload --port 8000</code></p>
+    </div>`;
+    document.getElementById('result-count').textContent = 'Backend offline';
+  }
+}
+
+function sortedProps() {
+  const arr = [...allProps];
+  if (currentSort === 'price-desc') arr.sort((a,b) => b.price_pkr - a.price_pkr);
+  else if (currentSort === 'price-asc') arr.sort((a,b) => a.price_pkr - b.price_pkr);
+  return arr;
+}
+
+function sortProps(val) { currentSort = val; renderProps(sortedProps()); }
+
+function renderProps(props) {
+  const grid = document.getElementById('prop-grid');
+  document.getElementById('result-count').textContent = `${props.length} Listing${props.length !== 1 ? 's' : ''} Found`;
+  if (!props.length) {
+    grid.innerHTML = `<div class="col-span-2 text-center py-20 text-on-surface-variant">
+      <div class="text-5xl mb-4">🔍</div>
+      <p class="font-headline text-xl font-bold mb-2">No properties found</p>
+      <p class="text-sm">Try adjusting your filters</p>
+    </div>`;
+    return;
+  }
+  grid.innerHTML = props.map((p, i) => `
+    <div class="group bg-surface-container-lowest rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-500 cursor-pointer" onclick="openInq('${esc(p.id)}','${esc(p.title)}','${esc(p.seller_phone)}')">
+      <div class="relative aspect-[16/10] overflow-hidden">
+        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          src="${getImg(p.type)}" alt="${esc(p.title)}" onerror="this.src='${typeImages.default}'"/>
+        <div class="absolute top-4 left-4 flex gap-2">
+          ${i < 2 ? `<span class="bg-primary text-on-primary text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest flex items-center gap-1 shadow-sm">
+            <span class="material-symbols-outlined text-xs" style="font-variation-settings:'FILL' 1;">verified</span> Verified</span>` : ''}
+        </div>
+        <div class="absolute bottom-4 right-4 bg-primary-container text-on-primary-container font-black px-4 py-2 rounded-xl text-lg shadow-lg">
+          ${esc(p.price_display)}
+        </div>
+      </div>
+      <div class="p-6">
+        <div class="flex gap-2 mb-3 flex-wrap">
+          <span class="text-[10px] font-bold text-primary uppercase tracking-tighter bg-primary/5 px-2 py-0.5 rounded">${esc(p.area || p.location?.split(',')[0])}</span>
+          <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter bg-surface-container-high px-2 py-0.5 rounded">${esc(p.area_marla)} Marla ${esc(p.type)}</span>
+        </div>
+        <h3 class="font-headline text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors leading-tight">${esc(p.title)}</h3>
+        <div class="flex items-center gap-5 text-on-surface-variant mb-4">
+          ${p.bedrooms ? `<div class="flex items-center gap-1.5 text-sm font-medium"><span class="material-symbols-outlined text-lg">bed</span>${p.bedrooms}</div>` : ''}
+          ${p.bathrooms ? `<div class="flex items-center gap-1.5 text-sm font-medium"><span class="material-symbols-outlined text-lg">bathtub</span>${p.bathrooms}</div>` : ''}
+          <div class="flex items-center gap-1.5 text-sm font-medium"><span class="material-symbols-outlined text-lg">location_on</span>${esc(p.location?.split(',').slice(-1)[0]?.trim() || p.location)}</div>
+        </div>
+        <button class="w-full py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl text-sm font-bold transition-colors">
+          Contact Seller →
+        </button>
+      </div>
+    </div>`).join('');
+}
+
+function applyFilters() { loadProps(); }
+function clearFilters() {
+  ['f-location','f-type','f-beds','f-max-price'].forEach(id => { document.getElementById(id).value = ''; });
+  loadProps();
+}
+
+// Inquiry Modal
+let inqPropId = null;
+function openInq(id, title, phone) {
+  inqPropId = id;
+  document.getElementById('inq-prop-info').textContent = `📩 Inquiry for: ${title}`;
+  // Pre-fill from auth
+  const user = Auth.get();
+  if (user) {
+    document.getElementById('inq-name').value  = user.name;
+    document.getElementById('inq-phone').value = user.phone;
+    document.getElementById('inq-email').value = user.email || '';
+  }
+  document.getElementById('inq-modal').classList.remove('hidden');
+}
+function closeInqModal() { document.getElementById('inq-modal').classList.add('hidden'); }
+document.addEventListener('click', e => {
+  if (e.target === document.getElementById('inq-modal')) closeInqModal();
+});
+
+async function sendInquiry() {
+  const name  = document.getElementById('inq-name').value.trim();
+  const phone = document.getElementById('inq-phone').value.trim();
+  const email = document.getElementById('inq-email').value.trim();
+  const msg   = document.getElementById('inq-msg').value.trim();
+  if (!name || !phone) { showToast('Name and phone are required', 'error'); return; }
+  try {
+    const r = await fetch(`${API}/api/inquiries`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ property_id: inqPropId, buyer_name: name, buyer_phone: phone, buyer_email: email, message: msg })
+    });
+    const d = await r.json();
+    if (d.success) { showToast('Inquiry sent! The seller will contact you soon. 📩'); closeInqModal(); }
+    else showToast(d.detail || 'Failed to send inquiry', 'error');
+  } catch { showToast('Cannot connect to backend', 'error'); }
+}
+
+// Hook up "List Property" → global add modal (from auth.js)
+function onPropertyAdded() { loadProps(); }
+
+window.onload = () => loadProps();
+</script>
+</body></html>

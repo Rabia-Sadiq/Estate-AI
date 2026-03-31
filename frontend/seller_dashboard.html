@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Estate-AI | Seller Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body{font-family:'Inter',sans-serif;background:#f7f9fb}
+.heading{font-family:'Manrope',sans-serif}
+.toast{position:fixed;bottom:24px;right:24px;z-index:999;padding:14px 20px;border-radius:12px;font-size:14px;font-weight:600;animation:slideup .3s ease}
+.toast.success{background:#10b981;color:#fff}.toast.error{background:#ef4444;color:#fff}
+@keyframes slideup{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.card{background:#fff;border-radius:16px;border:1px solid #e5e7eb}
+.prop-card{background:#fff;border-radius:16px;border:1px solid #e5e7eb;overflow:hidden;transition:box-shadow .2s}
+.prop-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600}
+input,select,textarea{width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:10px;font-size:14px;outline:none;font-family:'Inter',sans-serif;transition:border-color .2s;background:#fff}
+input:focus,select:focus,textarea:focus{border-color:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.1)}
+.btn{padding:10px 20px;border-radius:10px;font-weight:600;font-size:14px;border:none;cursor:pointer;transition:all .2s}
+.btn-green{background:#10b981;color:#fff}.btn-green:hover{background:#059669}
+.btn-blue{background:#e0f2fe;color:#0369a1}.btn-red{background:#fee2e2;color:#991b1b}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:50;display:flex;align-items:center;justify-content:center;padding:16px}
+.modal{background:#fff;border-radius:20px;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;padding:32px}
+.tab{padding:8px 18px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;background:transparent;color:#6b7280}
+.tab.active{background:#10b981;color:#fff}
+</style>
+</head>
+<body>
+
+<nav class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between sticky top-0 z-40">
+  <div class="flex items-center gap-3">
+    <div class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">E</div>
+    <span class="heading font-bold text-gray-900">Estate-AI</span>
+    <span class="text-gray-300 mx-1">|</span>
+    <span class="text-sm text-gray-500">Seller Dashboard</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <span class="text-sm font-semibold text-gray-700 hidden" id="seller-name-display"></span>
+    <button onclick="showAddModal()" class="btn btn-green">+ Add Property</button>
+    <button onclick="doLogout()" class="btn" style="background:#f3f4f6;color:#374151;border:1px solid #e5e7eb">Sign Out</button>
+  </div>
+</nav>
+
+<!-- LOGIN -->
+<div id="login-section" class="min-h-screen flex items-center justify-center p-6" style="background:linear-gradient(135deg,#f0fdf4 0%,#f7f9fb 100%)">
+  <div class="card p-8 w-full max-w-md shadow-xl">
+    <a href="landing_page.html" class="text-xs text-emerald-600 font-bold mb-6 inline-flex items-center gap-1 hover:underline">← Back to Estate-AI</a>
+    <div class="text-4xl mb-4">🏠</div>
+    <h1 class="heading text-2xl font-bold text-gray-900 mb-1">Seller Dashboard</h1>
+    <p class="text-gray-500 text-sm mb-6">Your phone number is your identity — no password needed</p>
+    <div class="space-y-4">
+      <div><label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Your Name *</label>
+        <input type="text" id="login-name" placeholder="Ahmed Khan" class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/></div>
+      <div><label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Phone Number *</label>
+        <input type="text" id="login-phone" placeholder="0300-1234567" onkeydown="if(event.key==='Enter')doLogin()" class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/></div>
+      <button onclick="doLogin()" class="btn btn-green w-full mt-2 py-3 text-sm rounded-xl">Enter Dashboard →</button>
+      <p class="text-xs text-gray-400 text-center">Already signed in on another tab? This page will auto-login.</p>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard-section" class="hidden max-w-6xl mx-auto px-4 py-8">
+  <!-- Stats -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+    <div class="card p-5"><p class="text-xs text-gray-500 font-medium uppercase tracking-wide mb-1">My Listings</p><p class="heading text-3xl font-bold text-gray-900" id="s-total">—</p></div>
+    <div class="card p-5"><p class="text-xs text-gray-500 font-medium uppercase tracking-wide mb-1">Inquiries</p><p class="heading text-3xl font-bold text-emerald-600" id="s-inq">—</p></div>
+    <div class="card p-5"><p class="text-xs text-gray-500 font-medium uppercase tracking-wide mb-1">Available</p><p class="heading text-3xl font-bold text-blue-600" id="s-avail">—</p></div>
+    <div class="card p-5"><p class="text-xs text-gray-500 font-medium uppercase tracking-wide mb-1">Sold/Rented</p><p class="heading text-3xl font-bold text-purple-600" id="s-sold">—</p></div>
+  </div>
+  <!-- Tabs -->
+  <div class="flex gap-2 mb-6 bg-white p-2 rounded-xl border border-gray-200 w-fit">
+    <button class="tab active" onclick="switchTab('listings',this)">My Listings</button>
+    <button class="tab" onclick="switchTab('inquiries',this)">Inquiries</button>
+  </div>
+  <div id="tab-listings"><div id="listings-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div></div>
+  <div id="tab-inquiries" class="hidden"><div id="inquiries-list"></div></div>
+</div>
+
+<!-- ADD MODAL -->
+<div id="add-modal" class="modal-bg hidden">
+  <div class="modal">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="heading text-xl font-bold">Add New Property</h2>
+      <button onclick="closeModal()" class="text-gray-400 text-2xl leading-none">&times;</button>
+    </div>
+    <form id="add-form" class="space-y-4">
+      <div class="col-span-2"><label class="block text-sm font-medium text-gray-700 mb-1">Title *</label>
+        <input id="f-title" placeholder="DHA Phase 6 - 10 Marla Modern House" required/></div>
+      <div class="grid grid-cols-2 gap-4">
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Society/Area *</label><input id="f-area" placeholder="DHA Phase 6" required/></div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Full Location *</label><input id="f-location" placeholder="DHA Phase 6, Lahore" required/></div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Type *</label>
+          <select id="f-type" required><option value="">Select</option><option>House</option><option>Bungalow</option><option>Apartment</option><option>Plot</option><option>Commercial Plot</option><option>Shop</option><option>Office</option></select></div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Area (Marla) *</label><input type="number" id="f-marla" placeholder="10" step="0.5" min="1" required/></div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Bedrooms</label><input type="number" id="f-beds" placeholder="0" min="0"/></div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Bathrooms</label><input type="number" id="f-baths" placeholder="0" min="0"/></div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Price (PKR) *</label><input type="number" id="f-price" placeholder="45000000" oninput="updatePriceDisplay()" required/></div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Price Display</label><input id="f-price-display" readonly style="background:#f9fafb"/></div>
+      </div>
+      <div><label class="block text-sm font-medium text-gray-700 mb-1">Features (comma separated)</label>
+        <input id="f-features" placeholder="Corner plot, Near park, Gas available"/></div>
+      <div><label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+        <textarea id="f-desc" rows="3" placeholder="Describe the property..."></textarea></div>
+      <div class="flex gap-3 pt-2">
+        <button type="submit" class="btn btn-green flex-1">List Property 🚀</button>
+        <button type="button" onclick="closeModal()" style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:10px;font-weight:600;cursor:pointer;background:#fff">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div id="edit-modal" class="modal-bg hidden">
+  <div class="modal">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="heading text-xl font-bold">Edit Property</h2>
+      <button onclick="closeEditModal()" class="text-gray-400 text-2xl">&times;</button>
+    </div>
+    <form id="edit-form" class="space-y-4">
+      <input type="hidden" id="edit-id"/>
+      <div><label class="block text-sm font-medium text-gray-700 mb-1">Title</label><input id="edit-title"/></div>
+      <div class="grid grid-cols-2 gap-4">
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Price (PKR)</label><input type="number" id="edit-price" oninput="updateEditPrice()"/></div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Price Display</label><input id="edit-price-display" readonly style="background:#f9fafb"/></div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Bedrooms</label><input type="number" id="edit-beds"/></div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Bathrooms</label><input type="number" id="edit-baths"/></div>
+      </div>
+      <div><label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+        <select id="edit-status"><option value="Available">Available</option><option value="Sold">Sold</option><option value="Rented">Rented</option><option value="Pending">Pending</option></select></div>
+      <div><label class="block text-sm font-medium text-gray-700 mb-1">Description</label><textarea id="edit-desc" rows="3"></textarea></div>
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-green flex-1">Save Changes ✅</button>
+        <button type="button" onclick="closeEditModal()" style="flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:10px;font-weight:600;cursor:pointer;background:#fff">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+const API='http://127.0.0.1:8000';
+let seller=null;
+
+// ── Auth sync: read from shared localStorage (set by auth.js on other pages) ──
+function getStoredUser(){
+  try{ return JSON.parse(localStorage.getItem('estateai_user')||'null'); }catch{return null;}
+}
+function storeUser(u){ localStorage.setItem('estateai_user', JSON.stringify(u)); }
+
+function doLogin(){
+  const name=document.getElementById('login-name').value.trim();
+  const phone=document.getElementById('login-phone').value.trim();
+  if(!name||!phone){showToast('Enter name and phone','error');return}
+  seller={name,phone,role:'seller'};
+  storeUser(seller);
+  showDashboard();
+}
+
+function showDashboard(){
+  document.getElementById('login-section').classList.add('hidden');
+  document.getElementById('dashboard-section').classList.remove('hidden');
+  document.getElementById('seller-name-display').textContent=seller.name;
+  document.getElementById('seller-name-display').classList.remove('hidden');
+  loadAll();
+}
+
+// Auto-login if user is already signed in from another page
+window.addEventListener('DOMContentLoaded', ()=>{
+  const stored = getStoredUser();
+  if(stored && stored.name && stored.phone){
+    seller = stored;
+    // Pre-fill the form too (in case they see the login briefly)
+    document.getElementById('login-name').value = stored.name;
+    document.getElementById('login-phone').value = stored.phone;
+    showDashboard();
+  }
+});
+
+// Logout button
+function doLogout(){
+  localStorage.removeItem('estateai_user');
+  seller = null;
+  document.getElementById('dashboard-section').classList.add('hidden');
+  document.getElementById('login-section').classList.remove('hidden');
+  document.getElementById('login-name').value='';
+  document.getElementById('login-phone').value='';
+  showToast('Signed out');
+}
+
+async function loadAll(){await Promise.all([loadProps(),loadInqs()])}
+
+async function loadProps(){
+  try{
+    const r=await fetch(`${API}/api/seller/${encodeURIComponent(seller.phone)}/properties`);
+    const d=await r.json();
+    renderProps(d.properties||[]);
+  }catch(e){
+    document.getElementById('listings-grid').innerHTML='<div class="col-span-3 text-center py-12 text-red-400 font-medium">⚠️ Backend not running. Run: uvicorn server:app --reload --port 8000</div>';
+  }
+}
+
+async function loadInqs(){
+  try{
+    const r=await fetch(`${API}/api/seller/${encodeURIComponent(seller.phone)}/inquiries`);
+    const d=await r.json();
+    renderInqs(d.inquiries||[]);
+    document.getElementById('s-inq').textContent=(d.inquiries||[]).length;
+  }catch(e){}
+}
+
+function renderProps(props){
+  document.getElementById('s-total').textContent=props.length;
+  document.getElementById('s-avail').textContent=props.filter(p=>p.status==='Available').length;
+  document.getElementById('s-sold').textContent=props.filter(p=>['Sold','Rented'].includes(p.status)).length;
+  const g=document.getElementById('listings-grid');
+  if(!props.length){
+    g.innerHTML='<div class="col-span-3 text-center py-16"><div class="text-5xl mb-4">🏠</div><p class="text-gray-500 mb-4">No listings yet</p><button onclick="showAddModal()" class="btn btn-green">Add First Property</button></div>';
+    return;
+  }
+  const statusColor={'Available':'bg-emerald-500','Sold':'bg-purple-500','Rented':'bg-yellow-400','Pending':'bg-gray-400'};
+  const badgeColor={'Available':'background:#d1fae5;color:#065f46','Sold':'background:#ede9fe;color:#5b21b6','Rented':'background:#fef3c7;color:#92400e','Pending':'background:#f3f4f6;color:#374151'};
+  g.innerHTML=props.map(p=>`
+    <div class="prop-card">
+      <div class="h-2 ${statusColor[p.status]||'bg-gray-400'}"></div>
+      <div class="p-5">
+        <div class="flex items-start justify-between gap-2 mb-2">
+          <h3 class="heading font-bold text-gray-900 text-sm leading-tight">${p.title}</h3>
+          <span class="badge flex-shrink-0" style="${badgeColor[p.status]||''}">${p.status}</span>
+        </div>
+        <p class="text-xs text-gray-500 mb-2">📍 ${p.location}</p>
+        <div class="flex flex-wrap gap-2 text-xs text-gray-600 mb-3">
+          ${p.bedrooms?`<span>🛏 ${p.bedrooms}</span>`:''}
+          ${p.bathrooms?`<span>🚿 ${p.bathrooms}</span>`:''}
+          <span>📐 ${p.area_marla} Marla</span>
+          <span>🏠 ${p.type}</span>
+        </div>
+        <p class="heading text-lg font-bold text-emerald-600 mb-3">PKR ${p.price_display}</p>
+        <div class="flex gap-2">
+          <button onclick='showEditModal(${JSON.stringify(p)})' class="btn btn-blue" style="flex:1;font-size:13px;padding:8px">✏️ Edit</button>
+          <button onclick="delProp('${p.id}')" class="btn btn-red" style="flex:1;font-size:13px;padding:8px">🗑 Remove</button>
+        </div>
+        <p class="text-xs text-gray-400 mt-2">${new Date(p.created_at).toLocaleDateString('en-PK')}</p>
+      </div>
+    </div>`).join('');
+}
+
+function renderInqs(inqs){
+  const l=document.getElementById('inquiries-list');
+  if(!inqs.length){l.innerHTML='<div class="text-center py-16 text-gray-400"><div class="text-4xl mb-3">💬</div><p>No inquiries yet</p></div>';return}
+  l.innerHTML=inqs.map(i=>`
+    <div style="background:#f9fafb;border-radius:12px;padding:16px;border-left:3px solid #10b981;margin-bottom:12px">
+      <div class="flex items-start justify-between">
+        <div>
+          <p class="font-semibold text-gray-900">${i.buyer_name}</p>
+          <p class="text-sm font-medium" style="color:#10b981">${i.buyer_phone}</p>
+          ${i.buyer_email?`<p class="text-sm text-gray-500">${i.buyer_email}</p>`:''}
+        </div>
+        <span class="text-xs text-gray-400">${new Date(i.created_at).toLocaleString('en-PK')}</span>
+      </div>
+      <p class="text-xs text-gray-500 mt-2 font-medium">🏠 ${i.property_title}</p>
+      ${i.message?`<p class="text-sm text-gray-700 mt-2 bg-white rounded-lg p-3 italic">"${i.message}"</p>`:''}
+      <a href="tel:${i.buyer_phone}" class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full" style="background:#d1fae5;color:#065f46">📞 Call Buyer</a>
+    </div>`).join('');
+}
+
+// Add form
+function showAddModal(){document.getElementById('add-modal').classList.remove('hidden')}
+function closeModal(){document.getElementById('add-modal').classList.add('hidden');document.getElementById('add-form').reset();document.getElementById('f-price-display').value=''}
+function updatePriceDisplay(){document.getElementById('f-price-display').value=fmtPrice(parseFloat(document.getElementById('f-price').value)||0)}
+function updateEditPrice(){document.getElementById('edit-price-display').value=fmtPrice(parseFloat(document.getElementById('edit-price').value)||0)}
+function fmtPrice(pkr){
+  if(pkr>=10000000)return(pkr/10000000).toFixed(2).replace(/\.?0+$/,'')+ ' Crore';
+  if(pkr>=100000)return(pkr/100000).toFixed(1).replace(/\.0$/,'')+ ' Lakh';
+  return pkr.toLocaleString();
+}
+
+document.getElementById('add-form').onsubmit=async(e)=>{
+  e.preventDefault();
+  const body={
+    seller_name:seller.name, seller_phone:seller.phone,
+    title:document.getElementById('f-title').value,
+    area:document.getElementById('f-area').value,
+    location:document.getElementById('f-location').value,
+    type:document.getElementById('f-type').value,
+    area_marla:parseFloat(document.getElementById('f-marla').value),
+    bedrooms:parseInt(document.getElementById('f-beds').value)||0,
+    bathrooms:parseInt(document.getElementById('f-baths').value)||0,
+    price_pkr:parseFloat(document.getElementById('f-price').value),
+    price_display:document.getElementById('f-price-display').value,
+    features:document.getElementById('f-features').value.split(',').map(s=>s.trim()).filter(Boolean),
+    description:document.getElementById('f-desc').value,
+  };
+  try{
+    const r=await fetch(`${API}/api/properties`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const d=await r.json();
+    if(d.success){showToast('Property listed! 🎉','success');closeModal();loadAll()}
+    else showToast(d.detail||'Error','error');
+  }catch(e){showToast('Cannot connect to backend','error')}
+};
+
+// Edit form
+function showEditModal(p){
+  document.getElementById('edit-id').value=p.id;
+  document.getElementById('edit-title').value=p.title;
+  document.getElementById('edit-price').value=p.price_pkr;
+  document.getElementById('edit-price-display').value=p.price_display;
+  document.getElementById('edit-beds').value=p.bedrooms;
+  document.getElementById('edit-baths').value=p.bathrooms;
+  document.getElementById('edit-status').value=p.status;
+  document.getElementById('edit-desc').value=p.description||'';
+  document.getElementById('edit-modal').classList.remove('hidden');
+}
+function closeEditModal(){document.getElementById('edit-modal').classList.add('hidden')}
+document.getElementById('edit-form').onsubmit=async(e)=>{
+  e.preventDefault();
+  const id=document.getElementById('edit-id').value;
+  const body={title:document.getElementById('edit-title').value,price_pkr:parseFloat(document.getElementById('edit-price').value),price_display:document.getElementById('edit-price-display').value,bedrooms:parseInt(document.getElementById('edit-beds').value),bathrooms:parseInt(document.getElementById('edit-baths').value),status:document.getElementById('edit-status').value,description:document.getElementById('edit-desc').value};
+  try{
+    const r=await fetch(`${API}/api/properties/${id}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const d=await r.json();
+    if(d.success){showToast('Updated! ✅','success');closeEditModal();loadAll()}
+    else showToast('Update failed','error');
+  }catch(e){showToast('Cannot connect','error')}
+};
+
+async function delProp(id){
+  if(!confirm('Remove this property?'))return;
+  try{
+    const r=await fetch(`${API}/api/properties/${id}`,{method:'DELETE'});
+    const d=await r.json();
+    if(d.success){showToast('Removed','success');loadAll()}
+  }catch(e){showToast('Error','error')}
+}
+
+function switchTab(tab,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-listings').classList.toggle('hidden',tab!=='listings');
+  document.getElementById('tab-inquiries').classList.toggle('hidden',tab!=='inquiries');
+}
+
+function showToast(msg,type='success'){
+  const t=document.createElement('div');
+  t.className=`toast ${type}`;t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),3000);
+}
+</script>
+</body>
+</html>

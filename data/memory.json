@@ -1,0 +1,19 @@
+{
+  "sess1": {
+    "location": "DHA",
+    "_last_seen": 1774873853.6002471,
+    "bedrooms": 3,
+    "budget_crore": 8
+  },
+  "12345": {
+    "location": "DHA",
+    "_last_seen": 1774873853.5955098,
+    "property_type": "House",
+    "bedrooms": "3",
+    "budget_crore": "8"
+  },
+  "new_session": {
+    "name": "Zara",
+    "_last_seen": 1774935293.5533953
+  }
+}

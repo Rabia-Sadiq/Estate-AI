@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Estate-AI | Zara AI Interface</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "on-error": "#ffffff",
+                "surface-container-lowest": "#ffffff",
+                "on-tertiary": "#ffffff",
+                "secondary-fixed": "#d5e3fc",
+                "on-error-container": "#93000a",
+                "error": "#ba1a1a",
+                "surface-dim": "#d8dadc",
+                "on-tertiary-fixed": "#111c2d",
+                "on-background": "#191c1e",
+                "surface-container-low": "#f2f4f6",
+                "surface-container-high": "#e6e8ea",
+                "on-secondary-container": "#57657a",
+                "tertiary": "#545f73",
+                "surface-variant": "#e0e3e5",
+                "surface-tint": "#006c49",
+                "background": "#f7f9fb",
+                "outline": "#6c7a71",
+                "inverse-on-surface": "#eff1f3",
+                "on-primary-container": "#00422b",
+                "secondary-fixed-dim": "#b9c7df",
+                "on-tertiary-fixed-variant": "#3c475a",
+                "on-primary-fixed": "#002113",
+                "on-tertiary-container": "#2e394c",
+                "surface-bright": "#f7f9fb",
+                "tertiary-fixed-dim": "#bcc7de",
+                "surface": "#f7f9fb",
+                "primary-fixed": "#6ffbbe",
+                "secondary-container": "#d5e3fc",
+                "primary": "#006c49",
+                "on-primary-fixed-variant": "#005236",
+                "on-secondary-fixed-variant": "#3a485b",
+                "outline-variant": "#bbcabf",
+                "on-surface-variant": "#3c4a42",
+                "primary-fixed-dim": "#4edea3",
+                "tertiary-container": "#98a3ba",
+                "on-secondary": "#ffffff",
+                "inverse-primary": "#4edea3",
+                "surface-container": "#eceef0",
+                "on-surface": "#191c1e",
+                "on-primary": "#ffffff",
+                "primary-container": "#10b981",
+                "error-container": "#ffdad6",
+                "secondary": "#515f74",
+                "surface-container-highest": "#e0e3e5",
+                "tertiary-fixed": "#d8e3fb",
+                "inverse-surface": "#2d3133",
+                "on-secondary-fixed": "#0d1c2e"
+              },
+              fontFamily: {
+                "headline": ["Manrope"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .thinking-dot {
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        .thinking-dot:nth-child(2) { animation-delay: 0.2s; }
+        .thinking-dot:nth-child(3) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/20">
+<!-- TopNavBar - Fixed Shell -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm shadow-emerald-900/5 transition-all">
+<div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<a href="/app/landing_page.html" class="text-2xl font-black tracking-tight text-emerald-700">Estate-AI</a>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 hover:text-emerald-500 transition-colors duration-300 font-medium text-sm" href="/app/landing_page.html">Explore</a>
+<a class="text-slate-600 hover:text-emerald-500 transition-colors duration-300 font-medium text-sm" href="/app/listing.html">Listings</a>
+<a class="text-slate-600 hover:text-emerald-500 transition-colors duration-300 font-medium text-sm" href="/app/market_trends.html">Market Trends</a>
+<a class="text-slate-600 hover:text-emerald-500 transition-colors duration-300 font-medium text-sm" href="/app/about.html">About</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button data-list-btn class="hidden lg:flex items-center gap-2 px-6 py-2 rounded-full bg-primary-container text-on-primary-container font-bold transition-all hover:opacity-90 active:scale-95 text-sm">
+                    List Property
+                </button>
+<button data-auth-btn class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 font-bold text-sm hover:bg-emerald-200 transition-all">
+                    Sign In
+                </button>
+</div>
+</div>
+</div>
+</nav>
+<!-- SideNavBar - Web Layout -->
+<aside class="hidden lg:flex h-screen w-64 fixed left-0 top-0 flex-col bg-slate-50 pt-24 border-r border-slate-100">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 p-3 bg-white rounded-xl shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-700">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface uppercase tracking-wider">Zara AI</p>
+<p class="text-[10px] text-slate-500">Concierge Active</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200 rounded-r-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-semibold text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-emerald-50 text-emerald-700 rounded-r-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="font-semibold text-sm">AI Insights</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200 rounded-r-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+<span class="font-semibold text-sm">My Listings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200 rounded-r-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-semibold text-sm">Inquiries</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-200 rounded-r-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-semibold text-sm">Settings</span>
+</a>
+</nav>
+<div class="p-4 mt-auto border-t border-slate-200/50">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-emerald-500 transition-colors text-xs uppercase tracking-widest font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Chat Canvas -->
+<main class="lg:ml-64 pt-20 h-screen flex flex-col bg-surface overflow-hidden">
+<!-- Chat Area -->
+<section id="chat-messages" class="flex-1 overflow-y-auto px-6 py-12 space-y-8 max-w-4xl mx-auto w-full">
+<!-- System Greeting -->
+<div class="flex flex-col items-center text-center mb-16">
+<div class="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-xl shadow-emerald-900/10 mb-6">
+<span class="material-symbols-outlined text-white text-4xl" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<h1 class="font-headline text-3xl font-extrabold text-on-surface tracking-tight mb-2">I'm Zara, your Elite Advisor.</h1>
+<p class="text-slate-500 font-medium max-w-md">Curating the finest properties in Lahore with data-driven precision.</p>
+<div class="flex flex-wrap justify-center gap-2 mt-6">
+  <button onclick="sendQuick('DHA mein 10 Marla house chahiye')" class="text-[11px] font-bold text-emerald-700 px-4 py-2 rounded-full bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-100">🏠 DHA Houses</button>
+  <button onclick="sendQuick('Bahria Town mein plots available hain?')" class="text-[11px] font-bold text-emerald-700 px-4 py-2 rounded-full bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-100">📍 Bahria Plots</button>
+  <button onclick="sendQuick('Market trends kya hain Lahore mein?')" class="text-[11px] font-bold text-slate-600 px-4 py-2 rounded-full bg-slate-50 hover:bg-slate-100 transition-colors border border-slate-100">📈 Market Trends</button>
+  <button onclick="sendQuick('5 Crore budget mein kya mil sakta hai?')" class="text-[11px] font-bold text-slate-600 px-4 py-2 rounded-full bg-slate-50 hover:bg-slate-100 transition-colors border border-slate-100">💰 5 Crore Budget</button>
+</div>
+</div>
+</section>
+<!-- Input Area -->
+<footer class="bg-white/80 backdrop-blur-xl px-8 py-6 border-t border-slate-100">
+<div class="max-w-4xl mx-auto">
+<div class="relative flex items-center">
+<input id="chat-input" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}"
+  class="w-full bg-surface-container-high border-none rounded-full py-5 px-8 pr-32 text-on-surface placeholder:text-slate-400 font-medium focus:ring-2 focus:ring-emerald-500/20 transition-all"
+  placeholder="Ask Zara about market trends or specific properties..."/>
+<div class="absolute right-3 flex items-center gap-2">
+<button onclick="toggleVoice()" id="mic-btn" class="w-10 h-10 flex items-center justify-center rounded-full text-slate-400 hover:bg-slate-200 hover:text-emerald-600 transition-all">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<button onclick="sendMessage()" id="send-btn" class="w-12 h-12 flex items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-emerald-900/20 hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<div class="flex justify-center gap-3 mt-4">
+<button onclick="sendQuick('Compare ROI DHA vs Bahria Town')" class="text-[10px] font-bold text-slate-400 hover:text-emerald-600 transition-colors uppercase tracking-widest px-3 py-1 rounded-full bg-slate-50">Compare ROI</button>
+<button onclick="sendQuick('Rental yields kya hain DHA mein?')" class="text-[10px] font-bold text-slate-400 hover:text-emerald-600 transition-colors uppercase tracking-widest px-3 py-1 rounded-full bg-slate-50">Rental Yields</button>
+<button onclick="sendQuick('Legal verification process kya hai?')" class="text-[10px] font-bold text-slate-400 hover:text-emerald-600 transition-colors uppercase tracking-widest px-3 py-1 rounded-full bg-slate-50">Legal Verification</button>
+</div>
+</div>
+</footer>
+</main>
+<!-- BottomNavBar - Mobile Only -->
+<nav class="md:hidden fixed bottom-0 w-full bg-white/90 backdrop-blur-md px-6 py-4 flex justify-between items-center z-50">
+<div class="flex flex-col items-center gap-1 text-emerald-700">
+<span class="material-symbols-outlined" data-icon="psychology" data-weight="fill" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Zara</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Explore</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Saved</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Profile</span>
+</div>
+</nav>
+<script>
+/**
+ * Estate-AI — Shared Auth + Utilities
+ * Used by all pages. Handles login state, modals, and add-property flow.
+ */
+
+const API = 'http://127.0.0.1:8000';
+
+// ── Auth helpers ─────────────────────────────────────────────────────────────
+const Auth = {
+  get() {
+    try { return JSON.parse(localStorage.getItem('estateai_user') || 'null'); }
+    catch { return null; }
+  },
+  set(user) { localStorage.setItem('estateai_user', JSON.stringify(user)); },
+  clear()   { localStorage.removeItem('estateai_user'); },
+  isLoggedIn() { return !!this.get(); }
+};
+
+// ── Price formatter ───────────────────────────────────────────────────────────
+function fmtPrice(pkr) {
+  if (!pkr) return '';
+  pkr = parseFloat(pkr);
+  if (pkr >= 10000000) return (pkr / 10000000).toFixed(2).replace(/\.?0+$/, '') + ' Crore';
+  if (pkr >= 100000)   return (pkr / 100000).toFixed(1).replace(/\.0$/, '') + ' Lakh';
+  return pkr.toLocaleString();
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+function showToast(msg, type = 'success') {
+  const el = document.createElement('div');
+  el.className = `fixed bottom-6 right-6 z-[9999] px-5 py-3 rounded-xl text-sm font-semibold shadow-xl transition-all
+    ${type === 'success' ? 'bg-emerald-600 text-white' : 'bg-red-500 text-white'}`;
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 3000);
+}
+
+// ── Inject global auth modal + add-property modal into every page ─────────────
+function injectModals() {
+  const html = `
+  <!-- ══════════════ AUTH MODAL ══════════════ -->
+  <div id="auth-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[9990] flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl w-full max-w-md shadow-2xl overflow-hidden">
+      <!-- Tabs -->
+      <div class="flex border-b border-gray-100">
+        <button onclick="switchAuthTab('login')" id="tab-login"
+          class="flex-1 py-4 text-sm font-bold tracking-wide border-b-2 border-emerald-600 text-emerald-700 transition-all">
+          Sign In
+        </button>
+        <button onclick="switchAuthTab('signup')" id="tab-signup"
+          class="flex-1 py-4 text-sm font-bold tracking-wide border-b-2 border-transparent text-gray-400 transition-all">
+          Create Account
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <div id="auth-login" class="p-8">
+        <div class="text-center mb-6">
+          <div class="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-3">
+            <span class="text-2xl">🏠</span>
+          </div>
+          <h2 class="text-xl font-bold text-gray-900">Welcome back</h2>
+          <p class="text-sm text-gray-500 mt-1">Use your phone number to sign in</p>
+        </div>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Phone Number *</label>
+            <input id="li-phone" type="tel" placeholder="0300-1234567"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Your Name *</label>
+            <input id="li-name" type="text" placeholder="Ahmed Khan"
+              onkeydown="if(event.key==='Enter')doLogin()"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/>
+          </div>
+          <button onclick="doLogin()"
+            class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm transition-all active:scale-95">
+            Sign In →
+          </button>
+          <p class="text-xs text-gray-400 text-center">No password needed — your phone is your identity</p>
+        </div>
+      </div>
+
+      <!-- Signup Form -->
+      <div id="auth-signup" class="p-8 hidden">
+        <div class="text-center mb-6">
+          <div class="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-3">
+            <span class="text-2xl">✨</span>
+          </div>
+          <h2 class="text-xl font-bold text-gray-900">Join Estate-AI</h2>
+          <p class="text-sm text-gray-500 mt-1">Create your free account</p>
+        </div>
+        <div class="space-y-4">
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">First Name *</label>
+              <input id="su-fname" type="text" placeholder="Ahmed"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Last Name</label>
+              <input id="su-lname" type="text" placeholder="Khan"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Phone Number *</label>
+            <input id="su-phone" type="tel" placeholder="0300-1234567"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Email (optional)</label>
+            <input id="su-email" type="email" placeholder="ahmed@email.com"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">I am a</label>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="flex items-center gap-2 px-4 py-3 rounded-xl border border-gray-200 cursor-pointer hover:border-emerald-400 transition-all has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50">
+                <input type="radio" name="su-role" value="buyer" checked class="accent-emerald-600"/>
+                <span class="text-sm font-semibold text-gray-700">Buyer</span>
+              </label>
+              <label class="flex items-center gap-2 px-4 py-3 rounded-xl border border-gray-200 cursor-pointer hover:border-emerald-400 transition-all has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50">
+                <input type="radio" name="su-role" value="seller" class="accent-emerald-600"/>
+                <span class="text-sm font-semibold text-gray-700">Seller</span>
+              </label>
+            </div>
+          </div>
+          <button onclick="doSignup()"
+            class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm transition-all active:scale-95">
+            Create Account ✨
+          </button>
+        </div>
+      </div>
+
+      <button onclick="closeAuthModal()"
+        class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 flex items-center justify-center text-lg font-bold transition-all">
+        ×
+      </button>
+    </div>
+  </div>
+
+  <!-- ══════════════ ADD PROPERTY MODAL ══════════════ -->
+  <div id="add-prop-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[9990] flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl w-full max-w-2xl shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between p-6 border-b border-gray-100 sticky top-0 bg-white rounded-t-3xl z-10">
+        <div>
+          <h2 class="text-xl font-bold text-gray-900">List Your Property</h2>
+          <p class="text-sm text-gray-500">Fill in the details to get it live</p>
+        </div>
+        <button onclick="closeAddPropModal()" class="w-9 h-9 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 flex items-center justify-center text-xl font-bold transition-all">×</button>
+      </div>
+      <form id="global-add-form" class="p-6 space-y-5" onsubmit="submitAddProperty(event)">
+        <div>
+          <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Property Title *</label>
+          <input id="ap-title" type="text" placeholder="DHA Phase 6 — 10 Marla Modern House" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Society / Area *</label>
+            <input id="ap-area" type="text" placeholder="DHA Phase 6" required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Full Location *</label>
+            <input id="ap-location" type="text" placeholder="DHA Phase 6, Lahore" required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Property Type *</label>
+            <select id="ap-type" required class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 bg-white transition-all">
+              <option value="">Select type...</option>
+              <option>House</option><option>Bungalow</option><option>Apartment</option>
+              <option>Plot</option><option>Commercial Plot</option><option>Shop</option><option>Office</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Area (Marla) *</label>
+            <input id="ap-marla" type="number" placeholder="10" step="0.5" min="1" required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Bedrooms</label>
+            <input id="ap-beds" type="number" placeholder="0" min="0"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Bathrooms</label>
+            <input id="ap-baths" type="number" placeholder="0" min="0"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Price (PKR) *</label>
+            <input id="ap-price" type="number" placeholder="45000000" oninput="updateApPriceDisplay()" required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Price Display</label>
+            <input id="ap-price-display" readonly placeholder="Auto-calculated"
+              class="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 text-sm font-bold text-emerald-700"/>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Features (comma separated)</label>
+          <input id="ap-features" type="text" placeholder="Corner plot, Near park, Gas available, New construction"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-600 mb-1.5 uppercase tracking-wide">Description</label>
+          <textarea id="ap-desc" rows="3" placeholder="Describe the property..."
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all resize-none"></textarea>
+        </div>
+        <!-- Seller info (auto-filled if logged in) -->
+        <div id="ap-seller-section" class="p-4 bg-gray-50 rounded-2xl space-y-3 border border-dashed border-gray-200">
+          <p class="text-xs font-bold text-gray-500 uppercase tracking-wide">Your Contact Info</p>
+          <div class="grid grid-cols-2 gap-3">
+            <input id="ap-seller-name" type="text" placeholder="Your Name *"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/>
+            <input id="ap-seller-phone" type="tel" placeholder="Phone Number *"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all"/>
+          </div>
+        </div>
+        <button type="submit"
+          class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm transition-all active:scale-95 flex items-center justify-center gap-2">
+          <span>🚀</span> List Property
+        </button>
+      </form>
+    </div>
+  </div>
+  `;
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  document.body.appendChild(div);
+}
+
+// ── Auth Modal controls ───────────────────────────────────────────────────────
+function openAuthModal(defaultTab = 'login') {
+  document.getElementById('auth-modal').classList.remove('hidden');
+  switchAuthTab(defaultTab);
+}
+function closeAuthModal() {
+  document.getElementById('auth-modal').classList.add('hidden');
+}
+function switchAuthTab(tab) {
+  document.getElementById('auth-login').classList.toggle('hidden', tab !== 'login');
+  document.getElementById('auth-signup').classList.toggle('hidden', tab !== 'signup');
+  document.getElementById('tab-login').className = `flex-1 py-4 text-sm font-bold tracking-wide border-b-2 transition-all ${tab === 'login' ? 'border-emerald-600 text-emerald-700' : 'border-transparent text-gray-400'}`;
+  document.getElementById('tab-signup').className = `flex-1 py-4 text-sm font-bold tracking-wide border-b-2 transition-all ${tab === 'signup' ? 'border-emerald-600 text-emerald-700' : 'border-transparent text-gray-400'}`;
+}
+
+function doLogin() {
+  const phone = document.getElementById('li-phone').value.trim();
+  const name  = document.getElementById('li-name').value.trim();
+  if (!phone || !name) { showToast('Please enter your name and phone', 'error'); return; }
+  Auth.set({ name, phone, email: '', role: 'buyer' });
+  closeAuthModal();
+  showToast(`Welcome back, ${name}! 👋`);
+  updateNavAuth();
+  if (typeof onAuthSuccess === 'function') onAuthSuccess();
+}
+
+function doSignup() {
+  const fname = document.getElementById('su-fname').value.trim();
+  const lname = document.getElementById('su-lname').value.trim();
+  const phone = document.getElementById('su-phone').value.trim();
+  const email = document.getElementById('su-email').value.trim();
+  const role  = document.querySelector('input[name="su-role"]:checked')?.value || 'buyer';
+  if (!fname || !phone) { showToast('Name and phone are required', 'error'); return; }
+  const name = lname ? `${fname} ${lname}` : fname;
+  Auth.set({ name, phone, email, role });
+  closeAuthModal();
+  showToast(`Account created! Welcome, ${fname}! 🎉`);
+  updateNavAuth();
+  if (role === 'seller') {
+    setTimeout(() => { window.location.href = '/app/seller_dashboard.html'; }, 800);
+  }
+  if (typeof onAuthSuccess === 'function') onAuthSuccess();
+}
+
+function doLogout() {
+  Auth.clear();
+  showToast('Signed out. See you soon!');
+  updateNavAuth();
+  if (typeof onLogout === 'function') onLogout();
+}
+
+// ── Update nav bar to reflect login state ────────────────────────────────────
+function updateNavAuth() {
+  const user = Auth.get();
+  // Find all sign-in / list-property buttons added by pages and update them
+  document.querySelectorAll('[data-auth-btn]').forEach(btn => {
+    if (user) {
+      btn.textContent = user.name.split(' ')[0];
+      btn.onclick = doLogout;
+      btn.classList.add('text-emerald-700');
+    } else {
+      btn.textContent = 'Sign In';
+      btn.onclick = () => openAuthModal('login');
+    }
+  });
+  document.querySelectorAll('[data-list-btn]').forEach(btn => {
+    btn.onclick = () => {
+      if (Auth.isLoggedIn()) openAddPropModal();
+      else { openAuthModal('login'); }
+    };
+  });
+}
+
+// ── Add Property Modal ────────────────────────────────────────────────────────
+function openAddPropModal() {
+  const user = Auth.get();
+  if (!user) { openAuthModal('login'); return; }
+  // Pre-fill seller info if logged in
+  document.getElementById('ap-seller-name').value  = user.name;
+  document.getElementById('ap-seller-phone').value = user.phone;
+  document.getElementById('add-prop-modal').classList.remove('hidden');
+}
+function closeAddPropModal() {
+  document.getElementById('add-prop-modal').classList.add('hidden');
+  document.getElementById('global-add-form').reset();
+  document.getElementById('ap-price-display').value = '';
+}
+function updateApPriceDisplay() {
+  document.getElementById('ap-price-display').value = fmtPrice(document.getElementById('ap-price').value);
+}
+
+async function submitAddProperty(e) {
+  e.preventDefault();
+  const btn = e.submitter || e.target.querySelector('button[type=submit]');
+  btn.disabled = true;
+  btn.textContent = 'Listing...';
+  const body = {
+    seller_name:    document.getElementById('ap-seller-name').value.trim(),
+    seller_phone:   document.getElementById('ap-seller-phone').value.trim(),
+    title:          document.getElementById('ap-title').value,
+    area:           document.getElementById('ap-area').value,
+    location:       document.getElementById('ap-location').value,
+    type:           document.getElementById('ap-type').value,
+    area_marla:     parseFloat(document.getElementById('ap-marla').value),
+    bedrooms:       parseInt(document.getElementById('ap-beds').value) || 0,
+    bathrooms:      parseInt(document.getElementById('ap-baths').value) || 0,
+    price_pkr:      parseFloat(document.getElementById('ap-price').value),
+    price_display:  document.getElementById('ap-price-display').value,
+    features:       document.getElementById('ap-features').value.split(',').map(s => s.trim()).filter(Boolean),
+    description:    document.getElementById('ap-desc').value,
+  };
+  if (!body.seller_name || !body.seller_phone) {
+    showToast('Your name and phone are required', 'error');
+    btn.disabled = false; btn.innerHTML = '<span>🚀</span> List Property'; return;
+  }
+  try {
+    const r = await fetch(`${API}/api/properties`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+    });
+    const d = await r.json();
+    if (d.success) {
+      showToast('Property listed successfully! 🎉');
+      closeAddPropModal();
+      if (typeof onPropertyAdded === 'function') onPropertyAdded(d.property);
+    } else {
+      showToast(d.detail || 'Failed to list property', 'error');
+    }
+  } catch {
+    showToast('Cannot connect to backend. Is the server running?', 'error');
+  }
+  btn.disabled = false;
+  btn.innerHTML = '<span>🚀</span> List Property';
+}
+
+// ── Bootstrap on DOMContentLoaded ────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  injectModals();
+  updateNavAuth();
+
+  // Close modals on backdrop click
+  document.getElementById('auth-modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('auth-modal')) closeAuthModal();
+  });
+  document.getElementById('add-prop-modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('add-prop-modal')) closeAddPropModal();
+  });
+});
+
+</script>
+<script>
+// ── Zara AI Chat ──────────────────────────────────────────────────────────────
+const CHAT_API = 'http://127.0.0.1:8000';
+let sessionId = 'zara-' + Math.random().toString(36).slice(2);
+let isThinking = false;
+
+const messagesEl = document.getElementById('chat-messages');
+
+function appendUserMsg(text) {
+  const div = document.createElement('div');
+  div.className = 'flex justify-end items-start gap-4';
+  div.innerHTML = `<div class="max-w-[80%] bg-slate-100 text-on-surface p-5 rounded-2xl rounded-tr-none shadow-sm">
+    <p class="text-sm font-medium leading-relaxed">${escHtml(text)}</p></div>`;
+  messagesEl.appendChild(div);
+  scrollBottom();
+}
+
+function appendZaraMsg(html) {
+  const div = document.createElement('div');
+  div.className = 'flex justify-start items-start gap-4';
+  div.innerHTML = `
+    <div class="w-8 h-8 rounded-full bg-emerald-600 flex-shrink-0 flex items-center justify-center mt-1">
+      <span class="material-symbols-outlined text-white text-xs" style="font-variation-settings:'FILL' 1;">psychology</span>
+    </div>
+    <div class="max-w-[85%] bg-white text-on-surface p-5 rounded-2xl rounded-tl-none shadow-sm border border-emerald-50">
+      <p class="text-sm font-medium leading-relaxed">${html}</p>
+    </div>`;
+  messagesEl.appendChild(div);
+  scrollBottom();
+}
+
+function showThinking() {
+  const div = document.createElement('div');
+  div.id = 'thinking-bubble';
+  div.className = 'flex justify-start items-start gap-4';
+  div.innerHTML = `
+    <div class="w-8 h-8 rounded-full bg-emerald-600 flex-shrink-0 flex items-center justify-center mt-1">
+      <span class="material-symbols-outlined text-white text-xs" style="font-variation-settings:'FILL' 1;">psychology</span>
+    </div>
+    <div class="bg-white px-6 py-4 rounded-2xl rounded-tl-none shadow-sm flex items-center gap-2">
+      <span class="text-xs font-semibold text-slate-400 uppercase tracking-widest">Zara is thinking</span>
+      <div class="flex gap-1.5 ml-2">
+        <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 thinking-dot"></div>
+        <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 thinking-dot"></div>
+        <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 thinking-dot"></div>
+      </div>
+    </div>`;
+  messagesEl.appendChild(div);
+  scrollBottom();
+}
+
+function hideThinking() {
+  const el = document.getElementById('thinking-bubble');
+  if (el) el.remove();
+}
+
+function scrollBottom() {
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function renderReply(text) {
+  // Bold **text**, newlines to <br>
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+}
+
+async function sendMessage() {
+  if (isThinking) return;
+  const input = document.getElementById('chat-input');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+  isThinking = true;
+  document.getElementById('send-btn').disabled = true;
+
+  appendUserMsg(msg);
+  showThinking();
+
+  try {
+    const r = await fetch(`${CHAT_API}/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: msg, session_id: sessionId })
+    });
+    const d = await r.json();
+    hideThinking();
+
+    if (d.reply) {
+      appendZaraMsg(renderReply(d.reply));
+      if (d.map_update?.properties?.length) {
+        renderPropertyCards(d.map_update.properties);
+      }
+    } else {
+      appendZaraMsg('Mujhe is waqt jawab dene mein masla ho raha hai. Thodi der baad try karein.');
+    }
+  } catch {
+    hideThinking();
+    appendZaraMsg('⚠️ Backend se connect nahi ho pa raha. Please run: <code class="bg-slate-100 px-2 py-0.5 rounded text-xs">uvicorn server:app --reload --port 8000</code>');
+  }
+
+  isThinking = false;
+  document.getElementById('send-btn').disabled = false;
+}
+
+function sendQuick(text) {
+  document.getElementById('chat-input').value = text;
+  sendMessage();
+}
+
+function renderPropertyCards(props) {
+  const wrap = document.createElement('div');
+  wrap.className = 'flex justify-start items-start gap-4 mt-2';
+  const cards = props.slice(0, 3).map(p => `
+    <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all min-w-[220px] max-w-[260px]">
+      <div class="p-4">
+        <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">${escHtml(p.area || p.location?.split(',')[0] || '')}</span>
+        <h4 class="font-headline font-bold text-sm mt-2 mb-1 leading-tight">${escHtml(p.title)}</h4>
+        <p class="text-xs text-slate-500 mb-2">📍 ${escHtml(p.location)}</p>
+        <div class="flex gap-2 text-xs text-slate-600 mb-3 flex-wrap">
+          ${p.bedrooms ? `<span>🛏 ${p.bedrooms}</span>` : ''}
+          ${p.area_marla ? `<span>📐 ${p.area_marla}M</span>` : ''}
+          <span>🏠 ${escHtml(p.type)}</span>
+        </div>
+        <p class="text-emerald-700 font-black text-sm">PKR ${escHtml(p.price_display)}</p>
+        <a href="/app/byer_search.html" class="mt-3 block text-center py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700 transition-colors">View Details</a>
+      </div>
+    </div>`).join('');
+
+  wrap.innerHTML = `
+    <div class="w-8 h-8 flex-shrink-0"></div>
+    <div class="flex gap-3 overflow-x-auto pb-2 max-w-[85%]">${cards}</div>`;
+  messagesEl.appendChild(wrap);
+  scrollBottom();
+}
+
+// ── Voice input (Web Speech API) ─────────────────────────────────────────────
+let recognition = null;
+function toggleVoice() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) { showToast('Voice not supported in this browser', 'error'); return; }
+  if (recognition) { recognition.stop(); recognition = null; document.getElementById('mic-btn').classList.remove('text-red-500'); return; }
+  recognition = new SpeechRecognition();
+  recognition.lang = 'ur-PK';
+  recognition.interimResults = false;
+  recognition.onstart = () => document.getElementById('mic-btn').classList.add('text-red-500');
+  recognition.onresult = (e) => {
+    document.getElementById('chat-input').value = e.results[0][0].transcript;
+    recognition = null;
+    document.getElementById('mic-btn').classList.remove('text-red-500');
+  };
+  recognition.onend = () => { recognition = null; document.getElementById('mic-btn').classList.remove('text-red-500'); };
+  recognition.start();
+}
+</script>
+</body></html>
