@@ -94,10 +94,3 @@ Bina API key ke bhi test kar sakte hain!
   "status": "Available"
 }
 ```
-
-## Next Steps
-
-1. ✅ Backend ready
-2. 🔜 Frontend banayein (Next.js dashboard)
-3. 🔜 Voice integration (Web Speech API — browser mein built-in, free)
-4. 🔜 Map (Leaflet.js — free)
